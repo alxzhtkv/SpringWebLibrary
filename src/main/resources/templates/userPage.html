@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <h1>UserPage</h1>
+</head>
+<body>
+<div>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">id</th>
+            <th scope="col">username</th>
+            <th scope="col">password</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <div th:each="el : ${users}">
+            <tr>
+                <td><p th:text="${el.id}"/></td>
+                <td><p th:text="${el.username}"/></td>
+                <td><p th:text="${el.password}"/></td>
+
+
+            </tr>
+        </div>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
