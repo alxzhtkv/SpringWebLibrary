@@ -12,4 +12,9 @@ public class MainController {
         return "menu";
     }
 
+    @GetMapping("/menu")
+    public String getMenuPage(){
+        return "menu";
+    }
+
 }

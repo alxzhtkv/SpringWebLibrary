@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Добавление</title>
+    <title>Регистрация</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
@@ -171,8 +171,39 @@
             50%,100% {
                 bottom: 100%;
             }
+
+        }
+
+
+        a {
+            text-decoration: none;
+            display: inline-block;
+            padding: 8px 16px;
+        }
+
+        a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+        .previous {
+           color: #f1f1f1;
+           background-color: #243b55;
+        }
+
+        .next {
+            color: #f1f1f1;
+            background-color: #243b55;
+        }
+
+        .round {
+            border-radius: 50%;
         }
     </style>
+
+
+    <a href="\menu" class="previous round">&#8249;</a>
+
 </head>
 <body>
 <div class="login-box">
