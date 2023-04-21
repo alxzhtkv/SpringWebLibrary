@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +24,27 @@ public class SignUpController {
         return "signup";
     }
     @PostMapping("/signup")
-    public String signUpUser(User user){
+    public String signUpUser(User user, Model model){
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setActive(true);
-        user.getRoles().add(Role.USER);
-        userRepository.save(user);
+        if(!userRepository.existsByUsername(user.getUsername())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setActive(true);
+            user.getRoles().add(Role.USER);
+            userRepository.save(user);
+
+            String message = "Пользователь " + user.getUsername() + " успешно зарегистрирован!";
+            String script = String.format("$.confirm({title: 'Регистрация', content: '%s', type: 'green'});", message);
+            model.addAttribute("script", script);
+
+        }else {
+            String message = "Пользователь с данным usermame" + user.getUsername() + " уже зарегистрирован, выберите новый";
+            String script = String.format("$.confirm({title: 'Регистрация', content: '%s', type: 'green'});", message);
+            model.addAttribute("script", script);
+        }
+
+
+
         return "redirect:/signup";
-
     }
 
 
