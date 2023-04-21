@@ -1,12 +1,10 @@
 package com.library.demo.model;
 
-
-//import jakarta.persistence.*;
-import javax.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.persistence.*;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -18,8 +16,8 @@ import java.util.Set;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "User")
-public class User implements UserDetails {
+@Table(name = "Admin")
+public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -29,12 +27,12 @@ public class User implements UserDetails {
     @Column(name="active")
     private boolean active;
 
-    public User(String username, String password) {
+    public Admin(String username, String password) {
         this.username=username;
         this.password=password;
     }
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "id_user"))
+    @CollectionTable(name = "admin_roles", joinColumns = @JoinColumn(name = "id_admin"))
     @Enumerated(EnumType.STRING)
     private Set<Role> roles = new HashSet<>();
 

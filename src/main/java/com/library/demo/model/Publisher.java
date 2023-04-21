@@ -6,8 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
-
-import jakarta.persistence.*;
+import javax.persistence.*;
+//import jakarta.persistence.*;
 import java.util.List;
 
 @EqualsAndHashCode(of = "id")
