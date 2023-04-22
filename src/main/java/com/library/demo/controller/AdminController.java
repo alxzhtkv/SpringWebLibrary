@@ -15,4 +15,9 @@ public class AdminController {
 //        model.addAttribute("users", users);
         return "adminPage";
     }
+
+    @GetMapping("/addBook")
+    public String getAddBooksPage(){
+        return "addBooksPage";
+    }
 }
