@@ -32,19 +32,22 @@ public class SignUpController {
             user.getRoles().add(Role.USER);
             userRepository.save(user);
 
-            String message = "Пользователь " + user.getUsername() + " успешно зарегистрирован!";
-            String script = String.format("$.confirm({title: 'Регистрация', content: '%s', type: 'green'});", message);
-            model.addAttribute("script", script);
+            String message = "Вы успешно зарегистрировались!";
+            model.addAttribute("successMessage", message);
+            return "redirect:/signup?success";
 
         }else {
-            String message = "Пользователь с данным usermame" + user.getUsername() + " уже зарегистрирован, выберите новый";
-            String script = String.format("$.confirm({title: 'Регистрация', content: '%s', type: 'green'});", message);
-            model.addAttribute("script", script);
+            String message = "Пользователь с данным usermame уже зарегистирован";
+            model.addAttribute("errorMessage", message);
+            return "redirect:/signup?error";
+//            String message = "Пользователь с данным usermame" + user.getUsername() + " уже зарегистрирован, выберите новый";
+//            String script = String.format("$.confirm({title: 'Регистрация', content: '%s', type: 'green'});", message);
+//            model.addAttribute("script", script);
         }
 
 
 
-        return "redirect:/signup";
+//        return "redirect:/signup";
     }
 
 
