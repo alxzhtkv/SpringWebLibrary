@@ -32,6 +32,7 @@ public class SignUpController {
             user.getRoles().add(Role.USER);
             userRepository.save(user);
 
+
             String message = "Вы успешно зарегистрировались!";
             model.addAttribute("successMessage", message);
             return "redirect:/signup?success";

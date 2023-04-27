@@ -20,4 +20,10 @@ public class AdminController {
     public String getAddBooksPage(){
         return "addBooksPage";
     }
+
+
+    @GetMapping("/addAuthorAndGenre")
+    public String getAuthorAndGenrePage(){
+        return "addAuthorAndGenre";
+    }
 }

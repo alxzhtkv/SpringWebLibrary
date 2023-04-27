@@ -1,5 +1,6 @@
 package com.library.demo.model;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +12,8 @@ import org.hibernate.annotations.SelectBeforeUpdate;
 import javax.persistence.*;
 
 @Entity
-@Table(catalog = "webLibrary")
+@AllArgsConstructor
+@Table(name = "book")
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate

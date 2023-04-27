@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @EqualsAndHashCode(of = "id")
-@Table(catalog = "webLibrary")
+@Table(name = "genre")
 @DynamicUpdate
 @DynamicInsert
 @SelectBeforeUpdate
@@ -22,7 +22,7 @@ import java.util.List;
 public class Genre {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //используется встроенный в БД тип данных столбца -identity - для генерации значения первичного ключа.
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
