@@ -14,11 +14,11 @@ public class UserController {
 
 
     private final UserRepository userRepository;
-    @GetMapping("/users")
+    @GetMapping("/userManagement")
     public String getUserPage(Model model){
-//        Iterable<User> users = userRepository.findAll();
-//        model.addAttribute("users", users);
-        return "userPage";
+        Iterable<User> users = userRepository.findAll();
+        model.addAttribute("users", users);
+        return "userManagementPage";
     }
 
 

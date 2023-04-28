@@ -20,6 +20,35 @@
 
 
 
+                <div class="container mt-5" align="center">
+                    <h3>Список пользователей</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Username пользователя</th>
+                            <th scope="col">Пароль</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="el : ${users}">
+                            <tr>
+                                <td><p th:text="${el.username}"/></td>
+                                <td><p th:text="${el.password}"/></td>
+                                <td>
+                                    <form th:action="'/see/'+ ${el.id}" method="post">
+                                        <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
             </div>
         </div>
     </section>
