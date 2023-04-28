@@ -8,12 +8,14 @@ import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.SelectBeforeUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "author", catalog = "webLibrary")
+@Table (name = "author")
 @EqualsAndHashCode(of = "id")
 @Getter @Setter
 @DynamicUpdate
@@ -24,6 +26,8 @@ public class Author {
     @Id
     private Long id;
     private String fio;
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     // @Basic(fetch = FetchType.LAZY)
