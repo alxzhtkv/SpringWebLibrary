@@ -11,7 +11,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @EqualsAndHashCode(of = "id")
-@Table(catalog = "webLibrary")
+@Table(name = "publisher")
 @Getter @Setter
 @DynamicUpdate
 @DynamicInsert
@@ -23,7 +23,8 @@ public class Publisher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
+    @Column(name = "name")
+    private String nameP;
 
     //@Basic(fetch = FetchType.LAZY)
     @OneToMany(mappedBy = "publisher")
@@ -31,7 +32,7 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return name;
+        return nameP;
     }
 
 }

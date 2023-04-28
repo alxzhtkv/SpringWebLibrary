@@ -11,8 +11,8 @@ import java.util.List;
 @Repository
 public interface PublisherRepository extends JpaRepository<Publisher, Long> {
 
-    List<Publisher> findByNameContainingIgnoreCaseOrderByName(String name);
-
-    Page<Publisher> findByNameContainingIgnoreCaseOrderByName(String name, Pageable pageable);
+//    List<Publisher> findByNameContainingIgnoreCaseOrderByName(String name);
+//
+//    Page<Publisher> findByNameContainingIgnoreCaseOrderByName(String name, Pageable pageable);
 
 }
