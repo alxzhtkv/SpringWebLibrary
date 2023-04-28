@@ -26,4 +26,11 @@ public class AdminController {
     public String getAuthorAndGenrePage(){
         return "addAuthorAndGenre";
     }
+
+    @GetMapping("/userManagement")
+    public String getUserManagementPage(){
+        return "userManagementPage";
+    }
+
+
 }
