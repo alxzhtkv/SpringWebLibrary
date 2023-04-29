@@ -36,7 +36,7 @@
                                 <td><p th:text="${el.username}"/></td>
                                 <td><p th:text="${el.password}"/></td>
                                 <td>
-                                    <form th:action="'/see/'+ ${el.id}" method="post">
+                                    <form th:action="'/userManagement/'+ ${el.username}" method="post">
                                         <button type="submit" class="btn btn-outline-info">Удалить</button>
                                     </form>
                                 </td>

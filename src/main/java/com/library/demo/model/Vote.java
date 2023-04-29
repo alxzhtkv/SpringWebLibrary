@@ -13,7 +13,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(catalog = "webLibrary")
+@Table(name = "vote")
 @EqualsAndHashCode(of = "id")
 @Getter
 @Setter
