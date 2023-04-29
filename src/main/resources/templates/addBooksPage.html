@@ -83,16 +83,19 @@
           <label for="isbn">ISBN</label>
           <input type="text" id="isbn" name="isbn" required>
 
-          <!--    <label for="genre">Жанр</label>-->
-          <!--    <select id="genre" name="genre" required>-->
-          <!--      <option value="">Выберите жанр</option>-->
-          <!--      <option value="FICTION">Художественная литература</option>-->
-          <!--      <option value="NON_FICTION">Документальная литература</option>-->
-          <!--      <option value="SCIENCE_FICTION">Научная фантастика</option>-->
-          <!--    </select>-->
+              <label for="genre">Жанр</label>
+              <select id="genre" name="genre" required>
+                <option value="">Выберите жанр</option>
+                <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
 
-          <label for="author">Жанр</label>
-          <input type="text" id="genre" name="genre" required>
+
+<!--                <option value="FICTION">Художественная литература</option>-->
+<!--                <option value="NON_FICTION">Документальная литература</option>-->
+<!--                <option value="SCIENCE_FICTION">Научная фантастика</option>-->
+              </select>
+
+<!--          <label for="author">Жанр</label>-->
+<!--          <input type="text" id="genre" name="genre" required>-->
 
           <label for="author">Автор</label>
           <input type="text" id="author" name="author" required>
