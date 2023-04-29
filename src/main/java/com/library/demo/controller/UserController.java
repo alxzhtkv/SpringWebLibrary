@@ -26,8 +26,8 @@ public class UserController {
 
     @PostMapping("/userManagement/{username}")
     public String deleteUser(@PathVariable(value = "username") String username) {
-        User user = userRepository.findByUsername(username);
-        userRepository.delete(user);
+//        User user = userRepository.findByUsername(username);
+        userRepository.delete(userRepository.findByUsername(username));
         return "redirect:/userManagement";
     }
 }

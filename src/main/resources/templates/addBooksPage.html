@@ -88,20 +88,26 @@
                 <option value="">Выберите жанр</option>
                 <option th:each="genre : ${genres}" th:value="${genre.id}" th:text="${genre.name}"></option>
 
-
-<!--                <option value="FICTION">Художественная литература</option>-->
-<!--                <option value="NON_FICTION">Документальная литература</option>-->
-<!--                <option value="SCIENCE_FICTION">Научная фантастика</option>-->
               </select>
 
-<!--          <label for="author">Жанр</label>-->
-<!--          <input type="text" id="genre" name="genre" required>-->
+<!--          <label for="author">Автор</label>-->
+<!--          <input type="text" id="author" name="author" required>-->
 
           <label for="author">Автор</label>
-          <input type="text" id="author" name="author" required>
+          <select id="author" name="author" required>
+            <option value="">Выберите автора</option>
+            <option th:each="author : ${authors}" th:value="${author.id}" th:text="${author.fio}"></option>
+
+          </select>
 
           <label for="publisher">Издательство</label>
-          <input type="text" id="publisher" name="publisher" required>
+<!--          <input type="text" id="publisher" name="publisher" required>-->
+
+          <select id="publisher" name="publisher" required>
+            <option value="">Выберите издательство</option>
+            <option th:each="publisher : ${publishers}" th:value="${publisher.id}" th:text="${publisher.nameP}"></option>
+
+          </select>
 
           <label for="publishYear">Год издания</label>
           <input type="number" id="publishYear" name="publishYear" required>
