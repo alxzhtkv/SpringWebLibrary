@@ -67,11 +67,6 @@
 
                     </select>
 
-
-
-
-
-
                     <label for="descr">Описание</label>
                     <textarea id="descr" name="descr"></textarea>
 
@@ -82,6 +77,37 @@
             </div>
         </div>
     </section>
+
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <p class="lead text-body-secondary">Ознакомьтесь с отзывами других пользователей!</p>
+
+
+
+                <div class="review" th:each="review : ${reviews}">
+                    <div class="review-header">
+
+                        <span class="username" th:text="${review.username}"></span>
+                    </div>
+                    <div class="review-body">
+                        <span>Название книги:</span>
+                        <div class="book-id" th:each="book : ${books}" th:if="${review.bookId} == ${book.id}">
+                            <span th:text="${book.name}"></span>
+                        </div>
+                        <div class="description">
+                            <span>Отзыв:</span>
+                            <p th:text="${review.descr}"></p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+
 </main>
 
 <footer th:insert="blocks/footer::footer"></footer>
