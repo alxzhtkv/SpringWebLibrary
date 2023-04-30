@@ -84,6 +84,98 @@
             </div>
         </div>
     </section>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <div class="container mt-5" align="center">
+                    <h3>Список авторов</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">ФИО</th>
+                            <th scope="col">Дата рождения</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="el : ${authors}">
+                            <tr>
+                                <td><p th:text="${el.fio}"/></td>
+                                <td><p th:text="${el.birthday}"/></td>
+                                <td>
+                                    <form th:action="'/deleteAuthor/'+ ${el.id}" method="post">
+                                        <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <div class="container mt-5" align="center">
+                    <h3>Список жанров</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Дата рождения</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="genre : ${genres}">
+                            <tr>
+                                <td><p th:text="${genre.id}"/></td>
+                                <td><p th:text="${genre.name}"/></td>
+                                <td>
+                                    <form th:action="'/deleteGenre/'+ ${genre.id}" method="post">
+                                        <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+
+
+                <div class="container mt-5" align="center">
+                    <h3>Список издательст</h3>
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">id</th>
+                            <th scope="col">Название</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="publisher : ${publishers}">
+                            <tr>
+                                <td><p th:text="${publisher.id}"/></td>
+                                <td><p th:text="${publisher.nameP}"/></td>
+                                <td>
+                                    <form th:action="'/deletePublisher/'+ ${publisher.id}" method="post">
+                                        <button type="submit" class="btn btn-outline-info">Удалить</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+
+
+        </div>
+        </div>
+
+
+    </section>
 </main>
 
 <footer th:insert="blocks/footer::footer"></footer>

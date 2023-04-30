@@ -42,7 +42,17 @@ public class AdminController {
 
 
     @GetMapping("/addAuthorAndGenre")
-    public String getAuthorAndGenrePage(){
+    public String getAuthorAndGenrePage(Model model){
+
+        Iterable<Genre> genres = genreRepository.findAll();
+        model.addAttribute("genres", genres);
+
+        Iterable<Author> authors = authorRepository.findAll();
+        model.addAttribute("authors", authors);
+
+        Iterable<Publisher> publishers = publisherRepository.findAll();
+        model.addAttribute("publishers", publishers);
+
         return "addAuthorAndGenre";
     }
 

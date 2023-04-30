@@ -3,8 +3,10 @@ package com.library.demo.controller;
 import com.library.demo.model.*;
 import com.library.demo.repository.*;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -59,7 +61,44 @@ public class addRecordsController {
 
         return "redirect:/addRequest";
     }
+    @PostMapping("/deleteAuthor/{id}")
+    public String deleteAuthor(@PathVariable(value = "id") Long id){
+        try {
+            authorRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            System.out.println("низя удалять");
+            // например, вывод сообщения об ошибке на странице
+        }
 
+
+        return "redirect:/addAuthorAndGenre";
+    }
+
+    @PostMapping("/deleteGenre/{id}")
+    public String deleteGenre(@PathVariable(value = "id") Long id){
+        try {
+            genreRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            System.out.println("низя удалять");
+            // например, вывод сообщения об ошибке на странице
+        }
+
+
+        return "redirect:/addAuthorAndGenre";
+    }
+
+    @PostMapping("/deletePublisher/{id}")
+    public String deletePublisher(@PathVariable(value = "id") Long id){
+        try {
+            publisherRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e){
+            System.out.println("низя удалять");
+            // например, вывод сообщения об ошибке на странице
+        }
+
+
+        return "redirect:/addAuthorAndGenre";
+    }
 
 
 }
