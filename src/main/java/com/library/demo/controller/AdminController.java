@@ -48,6 +48,23 @@ public class AdminController {
 
 
 
+    @GetMapping("/firstArticle")
+    public String getFirstArticlePage(){
+        return "firstArticle";
+    }
+
+    @GetMapping("/secondArticle")
+    public String getSecondArticlePage(){
+        return "secondArticle";
+    }
+
+    @GetMapping("/thirdArticle")
+    public String getThirdArticlePage(){
+        return "thirdArticle";
+    }
+
+
+
 //    @GetMapping("/requestManagement")
 //    public String getRequestManagementPage(){
 //        return "requestManagement";
