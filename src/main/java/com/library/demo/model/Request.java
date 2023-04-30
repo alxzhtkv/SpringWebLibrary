@@ -3,6 +3,8 @@ package com.library.demo.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -10,6 +12,8 @@ import javax.persistence.*;
 @Table(name = "request")
 @EqualsAndHashCode(of = "id")
 @Data
+@Getter
+@Setter
 public class Request {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
