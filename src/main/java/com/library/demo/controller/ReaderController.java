@@ -41,6 +41,10 @@ public class ReaderController {
 
         return "addReview";
     }
+    @GetMapping("/addRequest")
+    public String getRequestPage(@AuthenticationPrincipal(expression = "username") String username){
+        return "addRequest";
+    }
 
 
 }

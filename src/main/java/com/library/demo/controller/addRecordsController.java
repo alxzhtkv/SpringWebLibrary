@@ -1,13 +1,7 @@
 package com.library.demo.controller;
 
-import com.library.demo.model.Author;
-import com.library.demo.model.Genre;
-import com.library.demo.model.Publisher;
-import com.library.demo.model.Review;
-import com.library.demo.repository.AuthorRepository;
-import com.library.demo.repository.GenreRepository;
-import com.library.demo.repository.PublisherRepository;
-import com.library.demo.repository.ReviewRepository;
+import com.library.demo.model.*;
+import com.library.demo.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,6 +15,8 @@ public class addRecordsController {
     private  final PublisherRepository publisherRepository;
 
     private final ReviewRepository reviewRepository;
+
+    private final RequestRepository requestRepository;
 
 
     @PostMapping("/addGenre")
@@ -52,6 +48,16 @@ public class addRecordsController {
         reviewRepository.save(review);
 
         return "redirect:/addReview";
+    }
+
+
+    @PostMapping("/addRequest")
+    public String addRequest(@AuthenticationPrincipal(expression = "username") String username, Request request){
+
+        request.setUsername(username);
+        requestRepository.save(request);
+
+        return "redirect:/addRequest";
     }
 
 
