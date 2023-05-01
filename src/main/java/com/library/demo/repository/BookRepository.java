@@ -14,7 +14,7 @@ import java.util.Optional;
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
 
-    Optional<Book> findById(Long id);
+    Book searchById(Long id);
 
     @Modifying
     @Query("select b.name from Book b where b.id  in :idList")

@@ -5,16 +5,13 @@ import com.library.demo.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.mock.web.MockMultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @Controller
@@ -55,6 +52,15 @@ public class BookController {
         return "booksCatalogUserPage";
     }
 
+
+
+    @GetMapping("/bookPage/{id}")
+    public String getBook(Model model, @PathVariable(value = "id") Long id){
+      Book book = bookRepository.searchById(id);
+       model.addAttribute("book", book);
+
+        return "bookPage";
+    }
 
 
 
