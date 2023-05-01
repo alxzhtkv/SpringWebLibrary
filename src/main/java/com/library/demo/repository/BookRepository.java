@@ -18,7 +18,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     @Modifying
     @Query("select b.name from Book b where b.id  in :idList")
-    ArrayList<String> getListOfBookNames(@Param("idList") ArrayList<Long> idList);
+    List<String> getListOfBookNames(@Param("idList") ArrayList idList);
 
 
 
