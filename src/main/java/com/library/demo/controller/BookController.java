@@ -46,5 +46,17 @@ public class BookController {
         return "booksCatalogPage";
     }
 
+    @GetMapping("/booksCatalogUser")
+    public String getBooksCatalogUserPage(Model model){
+        List<Book> books = bookRepository.findAll();
+        model.addAttribute("books", books);
+
+
+        return "booksCatalogUserPage";
+    }
+
+
+
+
 }
 

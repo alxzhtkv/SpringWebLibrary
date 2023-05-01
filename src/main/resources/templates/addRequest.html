@@ -53,7 +53,7 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Поделитесь Вашим впечатлением от прочитанного!</h1>
+        <h1 class="fw-light">Поделитесь, какие книги Вы бы хотеали видеть в нашей библиотеке!</h1>
         <p class="lead text-body-secondary">Расскажите нам, что бы Вы хотели видеть в нашей библиотеке.<br>
           Ваши запросы позволяют нам актуализировать каталог книг и предложить вам наиболее интересные и полезные книги. Мы всегда стараемся улучшать наш сервис и учитывать пожелания наших пользователей. Поэтому ваше мнение очень важно для нас.
         </p>
@@ -66,7 +66,7 @@
 
 
 
-          <label for="descr">Расскажите, какую книгу вы хотеди бы почитать:</label>
+          <label for="descr">Расскажите, какую книгу вы хотели бы почитать:</label>
           <textarea id="descr" name="descr"></textarea>
 
           <button class="button-style" type="submit">Сохранить</button>
@@ -76,6 +76,36 @@
       </div>
     </div>
   </section>
+
+  <h1 class="fw-light" align="center">Ваши оставленные запросы</h1>
+
+
+  <div class="container mt-5" align="center">
+    <h3>Список запросов</h3>
+    <table class="table">
+      <thead class="thead-dark">
+      <tr>
+        <th scope="col">Username пользователя</th>
+        <th scope="col">Запрос</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <div th:each="el : ${userRequests}">
+        <tr>
+          <td><p th:text="${el.username}"/></td>
+          <td><p th:text="${el.descr}"/></td>
+          <td>
+            <form th:action="'/requestUserManagement/'+ ${el.id}" method="post">
+              <button type="submit" class="btn btn-outline-info">Удалить</button>
+            </form>
+          </td>
+        </tr>
+      </div>
+      </tbody>
+    </table>
+
+  </div>
 
 
 </main>

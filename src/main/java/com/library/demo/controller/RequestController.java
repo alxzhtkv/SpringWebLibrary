@@ -25,11 +25,20 @@ public class RequestController {
         return "requestManagement";
     }
 
+
+
     @PostMapping("/requestManagement/{id}")
     public String deleteRequest(@PathVariable(value = "id") Long id){
        requestRepository.deleteById(id);
 
         return "redirect:/requestManagement";
+    }
+
+    @PostMapping("/requestUserManagement/{id}")
+    public String deleteRequestUser(@PathVariable(value = "id") Long id){
+        requestRepository.deleteById(id);
+
+        return "redirect:/addRequest";
     }
 
 }

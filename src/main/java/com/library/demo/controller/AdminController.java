@@ -89,6 +89,14 @@ public class AdminController {
     }
 
 
+    @GetMapping("/Usersearch")
+    public String searchUser(@RequestParam("search") String search, Model model) {
+        List<Book> books = bookRepository.searchBooks(search);
+        model.addAttribute("books", books);
+        return "booksCatalogUserPage";
+    }
+
+
 //    @GetMapping("/requestManagement")
 //    public String getRequestManagementPage(){
 //        return "requestManagement";

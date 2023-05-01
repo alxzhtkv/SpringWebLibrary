@@ -1,13 +1,7 @@
 package com.library.demo.controller;
 
-import com.library.demo.model.Book;
-import com.library.demo.model.Genre;
-import com.library.demo.model.Review;
-import com.library.demo.model.UserBook;
-import com.library.demo.repository.BookRepository;
-import com.library.demo.repository.GenreRepository;
-import com.library.demo.repository.ReviewRepository;
-import com.library.demo.repository.UserBookRepository;
+import com.library.demo.model.*;
+import com.library.demo.repository.*;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -25,6 +19,7 @@ public class ReaderController {
 
     private final GenreRepository genreRepository;
     private final UserBookRepository userBookRepository;
+    private final RequestRepository requestRepository;
 
     @GetMapping("/users")
     public String getUserPage(@AuthenticationPrincipal(expression = "username") String username){
@@ -49,7 +44,10 @@ public class ReaderController {
         return "addReview";
     }
     @GetMapping("/addRequest")
-    public String getRequestPage(@AuthenticationPrincipal(expression = "username") String username){
+    public String getRequestPage(@AuthenticationPrincipal(expression = "username") String username, Model model){
+
+        Iterable<Request> userRequests = requestRepository.getListOfUserRequestsByUsername(username);
+        model.addAttribute("userRequests",userRequests);
         return "addRequest";
     }
 
