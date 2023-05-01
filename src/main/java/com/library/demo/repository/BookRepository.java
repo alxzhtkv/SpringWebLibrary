@@ -20,6 +20,14 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query("select b.name from Book b where b.id  in :idList")
     List<String> getListOfBookNames(@Param("idList") ArrayList idList);
 
+    @Query("SELECT b FROM Book b WHERE " +
+            "LOWER(b.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(b.isbn) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(b.author.fio) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(b.genre.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
+            "LOWER(b.publisher.nameP) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    List<Book> searchBooks(@Param("keyword") String keyword);
+
 
 
 }

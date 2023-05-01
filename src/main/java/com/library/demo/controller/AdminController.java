@@ -2,15 +2,20 @@ package com.library.demo.controller;
 
 
 import com.library.demo.model.Author;
+import com.library.demo.model.Book;
 import com.library.demo.model.Genre;
 import com.library.demo.model.Publisher;
 import com.library.demo.repository.AuthorRepository;
+import com.library.demo.repository.BookRepository;
 import com.library.demo.repository.GenreRepository;
 import com.library.demo.repository.PublisherRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @AllArgsConstructor
@@ -19,6 +24,7 @@ public class AdminController {
     private final GenreRepository genreRepository;
     private final AuthorRepository authorRepository;
     private final PublisherRepository publisherRepository;
+    private final BookRepository bookRepository;
     @GetMapping("/admins")
     public String getAdminPage(Model model){
 //        Iterable<User> users = userRepository.findAll();
@@ -73,6 +79,14 @@ public class AdminController {
         return "thirdArticle";
     }
 
+
+
+    @GetMapping("/search")
+    public String search(@RequestParam("search") String search, Model model) {
+        List<Book> books = bookRepository.searchBooks(search);
+        model.addAttribute("books", books);
+        return "booksCatalogPage";
+    }
 
 
 //    @GetMapping("/requestManagement")
