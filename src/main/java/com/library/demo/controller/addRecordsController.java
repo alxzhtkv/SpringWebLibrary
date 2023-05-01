@@ -6,8 +6,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @Controller
 @AllArgsConstructor
@@ -19,7 +22,7 @@ public class addRecordsController {
     private final ReviewRepository reviewRepository;
 
     private final RequestRepository requestRepository;
-
+    private final UserBookRepository userBookRepository;
 
     @PostMapping("/addGenre")
     public String addGenre(Genre genre){
@@ -98,6 +101,25 @@ public class addRecordsController {
 
 
         return "redirect:/addAuthorAndGenre";
+    }
+
+
+    @PostMapping("/addUserBook")
+    public String getUserBookPage(@AuthenticationPrincipal(expression = "username") String username,
+                                  @ModelAttribute UserBook userBook,
+                                  @RequestParam("content1") MultipartFile contentFile,
+                                  @RequestParam("image1") MultipartFile imageFile) throws IOException {
+
+        byte[] content = contentFile.getBytes();
+        byte[] image = imageFile.getBytes();
+
+        userBook.setContent(content);
+        userBook.setImage(image);
+        userBook.setUsername(username);
+        userBookRepository.save(userBook);
+
+
+        return "redirect:/addUserBook";
     }
 
 

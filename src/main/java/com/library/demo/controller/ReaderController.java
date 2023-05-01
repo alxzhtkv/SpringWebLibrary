@@ -1,8 +1,10 @@
 package com.library.demo.controller;
 
 import com.library.demo.model.Book;
+import com.library.demo.model.Genre;
 import com.library.demo.model.Review;
 import com.library.demo.repository.BookRepository;
+import com.library.demo.repository.GenreRepository;
 import com.library.demo.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -18,6 +20,8 @@ import java.util.List;
 public class ReaderController {
     private final BookRepository bookRepository;
     private final ReviewRepository reviewRepository;
+
+    private final GenreRepository genreRepository;
 
     @GetMapping("/users")
     public String getUserPage(@AuthenticationPrincipal(expression = "username") String username){
@@ -45,6 +49,18 @@ public class ReaderController {
     public String getRequestPage(@AuthenticationPrincipal(expression = "username") String username){
         return "addRequest";
     }
+
+    @GetMapping("/addUserBook")
+    public String getUserBookPage(Model model){
+        Iterable<Genre> genres = genreRepository.findAll();
+        model.addAttribute("genres",genres);
+
+        return "userBooksPage";
+    }
+
+
+
+
 
 
 }

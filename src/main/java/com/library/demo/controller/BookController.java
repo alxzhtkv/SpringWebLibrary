@@ -27,7 +27,7 @@ public class BookController {
     public String addBook(@ModelAttribute Book book,
                           @RequestParam("content1") MultipartFile contentFile,
                           @RequestParam("image1") MultipartFile imageFile) throws IOException {
-        System.out.println(book.getAuthor());
+
         byte[] content = contentFile.getBytes();
         byte[] image = imageFile.getBytes();
         book.setContent(content);
@@ -41,7 +41,7 @@ public class BookController {
     public String getBooksCatalogPage(Model model){
         List<Book> books = bookRepository.findAll();
         model.addAttribute("books", books);
-        
+
 
         return "booksCatalogPage";
     }
