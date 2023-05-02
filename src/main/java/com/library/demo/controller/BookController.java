@@ -2,6 +2,7 @@ package com.library.demo.controller;
 
 import com.library.demo.model.*;
 import com.library.demo.repository.BookRepository;
+import com.library.demo.repository.UserBookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +19,9 @@ import java.util.Optional;
 @AllArgsConstructor
 public class BookController {
     private final BookRepository bookRepository;
+    private final UserBookRepository userBookRepository;
 
+// удаление пользователем своей же книги
 
     @PostMapping("/addBook")
     public String addBook(@ModelAttribute Book book,
