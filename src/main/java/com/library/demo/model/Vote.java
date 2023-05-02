@@ -26,11 +26,13 @@ public class Vote {
     @Id
     private Long id;
 
-    private String value;
+    @Column(name = "value")
+    private int value;
 
     @Column(name = "book_id")
-    private Date bookId;
+    private Long bookId;
 
+    @Column(name = "username")
     private String username;
 
 }
