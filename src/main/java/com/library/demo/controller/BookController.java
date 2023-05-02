@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.mock.web.MockMultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -65,6 +66,15 @@ public class BookController {
         return "bookPage";
     }
 
+    @GetMapping("/deleteUserBook/{id}")
+    public String deleteUserBook(HttpServletRequest request, @PathVariable(value = "id") Long id){
+        userBookRepository.deleteById(id);
+
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
+//         return "redirect:/userBookPage";
+
+    }
 
 
 }
