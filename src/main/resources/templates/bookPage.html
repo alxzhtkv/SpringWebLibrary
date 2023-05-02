@@ -8,6 +8,7 @@
     <style>
         .button-container {
             text-align: center;
+            margin-top: 5em;
         }
 
         .button-container button {
@@ -20,7 +21,38 @@
             width: 50%;
             padding: 10px;
 
+        }
 
+        .info-text-style{
+
+            font-size: 16px;
+        }
+
+
+        .image-box{
+            height: 10em;
+            width: auto;
+            margin: 10px;
+            padding: 5px;
+        }
+
+        .descr-box{
+            height: auto;
+            width: 50%;
+            margin: 10px;
+            padding: 5px;
+            padding-left: 5em;
+            text-align: justify ;
+        }
+
+
+        .wrapper{
+            display: flex;
+            height: auto;
+            width: 100%;
+            justify-content: space-evenly;
+            margin-bottom: 10em;
+            padding: 5px;
         }
     </style>
 
@@ -30,68 +62,90 @@
 
 
 <main>
-    <section class="py-5 text-center container">
+    <section style="padding-bottom: 12px; padding-top: 12px" class="py-5 text-center container" >
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light" th:text="${book.name}"></h1>
                 <p class="lead text-body-secondary" th:text="${book.author}"></p>
-                <p class="lead text-body-secondary">
-                    <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
-                        <image href="images/${book.image}" width="100%" height="100%" />
-                    </svg>
-                </p>
-                <p class="card-text" >
-                    <small class="text-body-secondary" th:text="${book.genre}"></small>
-                <div class="button-container">
-                    <a th:href="'/bookPage/'+${book.id}" method="get">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Читать</button>
-                    </a>
-
-                    <a href="#">
-                        <button type="button" class="btn btn-sm btn-outline-secondary">Скачать</button>
-                    </a>
-                </div>
-                </p>
-
-
-
-
+                <small class="text-body-secondary" th:text="${book.genre}"></small>
             </div>
         </div>
     </section>
 
+    <div class="wrapper">
+        <div class="image-box">
 
+            <p class="lead text-body-secondary">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                    <image href="images/${book.image}" width="100%" height="100%" />
+                </svg>
+            </p>
+            <div class="button-container">
+                <a th:href="'/bookPage/'+${book.id}" method="get">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Читать</button>
+                </a>
 
-        <div class="container" align="center">
-
-<!--            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">-->
-
-                <p class="card-text" >Описание:</p>
-            <div class="descr-container">
-                <p th:text="${book.descr}"></p>
-
+                <a href="#">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Скачать</button>
+                </a>
+                <a href="#">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">В избранное</button>
+                </a>
             </div>
 
 
-<!--                <p class="card-text" >-->
-<!--                    <small class="text-body-secondary" th:text="${book.genre}"></small>-->
-<!--                </p>-->
 
-<!--                <div class="d-flex justify-content-between align-items-center">-->
+        </div>
 
-<!--                    <small class="text-body-secondary">Кол-во страниц: </small>-->
-<!--                    <small class="text-body-secondary" th:text="${book.pageCount}"></small>-->
-<!--                </div>-->
+        <div class="descr-box">
+            <p class="lead text-body-secondary">Описание:</p>
+            <p th:text="${book.descr}"></p>
+            <p class="lead text-body-secondary">ISBN:</p>
+            <p th:text="${book.isbn}"></p>
+            <p class="lead text-body-secondary">Издательство:</p>
+            <p th:text="${book.publisher}"></p>
+            <p class="lead text-body-secondary">Год издания:</p>
+            <p th:text="${book.publishYear}"></p>
+            <p class="lead text-body-secondary" >Рейтиг:</p>
+            <p th:text="${book.totalRating}"></p>
 
 
 
 
+        </div>
+    </div>
 
 
+<!--        <div class="container" align="center">-->
 
+<!--&lt;!&ndash;            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">&ndash;&gt;-->
+
+<!--                <p class="card-text" >Описание:</p>-->
+<!--            <div class="descr-container">-->
+<!--                <p th:text="${book.descr}"></p>-->
 
 <!--            </div>-->
-        </div>
+
+
+<!--&lt;!&ndash;                <p class="card-text" >&ndash;&gt;-->
+<!--&lt;!&ndash;                    <small class="text-body-secondary" th:text="${book.genre}"></small>&ndash;&gt;-->
+<!--&lt;!&ndash;                </p>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <div class="d-flex justify-content-between align-items-center">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                    <small class="text-body-secondary">Кол-во страниц: </small>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <small class="text-body-secondary" th:text="${book.pageCount}"></small>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+
+
+
+
+
+
+
+
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--        </div>-->
 
 
 
