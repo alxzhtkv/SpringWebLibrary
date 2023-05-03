@@ -15,6 +15,7 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book searchById(Long id);
+    Book getBookById(Long id);
 
     @Modifying
     @Query("select b.name from Book b where b.id  in :idList")

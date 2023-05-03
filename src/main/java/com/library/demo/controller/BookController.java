@@ -4,14 +4,31 @@ import com.library.demo.model.*;
 import com.library.demo.repository.BookRepository;
 import com.library.demo.repository.UserBookRepository;
 import lombok.AllArgsConstructor;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 //import org.springframework.mock.web.MockMultipartFile;
 
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,19 +39,56 @@ public class BookController {
     private final BookRepository bookRepository;
     private final UserBookRepository userBookRepository;
 
-// удаление пользователем своей же книги
 
-    @PostMapping("/addBook")
-    public String addBook(@ModelAttribute Book book,
-                          @RequestParam("content1") MultipartFile contentFile,
+
+
+
+
+
+//    @PostMapping("/addBook")
+//    public String addBook(@ModelAttribute Book book,
+//                          @RequestParam("content1") MultipartFile contentFile,
+//                          @RequestParam("image1") MultipartFile imageFile) throws IOException {
+//
+//        byte[] content = contentFile.getBytes();
+//        byte[] image = imageFile.getBytes();
+//        book.setContent(content);
+//        book.setImage(image);
+//
+//        bookRepository.save(book);
+//        return "redirect:/addBook";
+//    }
+
+
+        @PostMapping("/addBook")
+        public String addBook(@ModelAttribute Book book,
                           @RequestParam("image1") MultipartFile imageFile) throws IOException {
 
-        byte[] content = contentFile.getBytes();
-        byte[] image = imageFile.getBytes();
-        book.setContent(content);
-        book.setImage(image);
 
-        bookRepository.save(book);
+            bookRepository.save(book);
+//            String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
+            String fileName = StringUtils.cleanPath(book.getId().toString() + ".jpg");
+            String uploadDir = "book-covers/";
+            String filePath = uploadDir + fileName;
+            try {
+                Path path = Paths.get(uploadDir);
+                if (!Files.exists(path)) {
+                    Files.createDirectories(path);
+                }
+                Files.copy(imageFile.getInputStream(), path.resolve(fileName));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            // сохранение относительного пути файла в базу данных
+            book.setImage(filePath);
+            bookRepository.save(book);
+
+//        byte[] content = contentFile.getBytes();
+//        byte[] image = imageFile.getBytes();
+//        book.setContent(content);
+//        book.setImage(image);
+//
+//        bookRepository.save(book);
         return "redirect:/addBook";
     }
 
@@ -76,6 +130,53 @@ public class BookController {
 
     }
 
+
+    @GetMapping("/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws IOException {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Book not found"));
+        String imagePath = book.getImage();
+        Path path = Paths.get(imagePath);
+        byte[] imageBytes = Files.readAllBytes(path);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.IMAGE_JPEG);
+        headers.setContentLength(imageBytes.length);
+        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
+    }
+
+//    @GetMapping("/image/{id}")
+//    public void showImage(@PathVariable Long id, HttpServletResponse response) throws IOException {
+//        Book book = bookRepository.findById(id).orElse(null);
+//        if (book != null && book.getImage() != null) {
+//            Resource resource = new ClassPathResource(book.getImage());
+//            InputStream inputStream = resource.getInputStream();
+//            response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//            IOUtils.copy(inputStream, response.getOutputStream());
+//        }
+//    }
+
+//    @GetMapping("/image/{id}")
+//    @ResponseBody
+//    public ResponseEntity<Resource> getImage(@PathVariable("id") Long id) throws IOException {
+//        // получение объекта Book по id
+//        Book book = bookRepository.findById(id).orElse(null);
+//        if (book == null || book.getImage() == null) {
+//            return ResponseEntity.notFound().build();
+//        }
+//        // получение относительного пути к картинке
+//        String imagePath = book.getImage();
+//        // создание объекта Resource для загружаемой картинки
+//        Resource resource = new UrlResource("file:" + imagePath);
+//        // проверка, существует ли файл на сервере
+////        if (!resource.exists()) {
+////            return ResponseEntity.notFound().build();
+////        }
+//        // настройка HTTP-заголовков для возврата изображения в браузер
+//        HttpHeaders headers = new HttpHeaders();
+//        headers.setContentType(MediaType.IMAGE_JPEG);
+//        headers.setContentLength(resource.contentLength());
+//        // возврат объекта ResponseEntity с загружаемым изображением и настроенными заголовками
+//        return new ResponseEntity<>(resource, headers, HttpStatus.OK);
+//    }
 
 }
 
