@@ -3,10 +3,13 @@ package com.library.demo.controller;
 import com.library.demo.model.*;
 import com.library.demo.repository.*;
 import lombok.AllArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,8 @@ public class ReaderController {
     private final GenreRepository genreRepository;
     private final UserBookRepository userBookRepository;
     private final RequestRepository requestRepository;
+
+    private final FavouritesRepository favouritesRepository;
 
     @GetMapping("/users")
     public String getUserPage(@AuthenticationPrincipal(expression = "username") String username){
@@ -63,6 +68,7 @@ public class ReaderController {
 
         return "userBooksPage";
     }
+
 
 
 

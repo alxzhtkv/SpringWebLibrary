@@ -100,7 +100,7 @@
 
 </head>
 <body>
-<header th:insert="blocks/adminHeader::header_admin"></header>
+<header th:insert="blocks/header::header"></header>
 
 
 <main>
@@ -130,7 +130,7 @@
                 <a href="#">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Скачать</button>
                 </a>
-                <a href="#">
+                <a th:href="'/addFavourite/'+${book.id}" method="get">
                     <button type="button" class="btn btn-sm btn-outline-secondary">В избранное</button>
                 </a>
             </div>

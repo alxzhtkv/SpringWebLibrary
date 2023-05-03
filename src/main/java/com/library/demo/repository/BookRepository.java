@@ -29,5 +29,8 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     List<Book> searchBooks(@Param("keyword") String keyword);
 
 
+    @Modifying
+    @Query("select b from Book b where b.id  in :idList")
+    List<Book> getBooksByIds(@Param("idList") ArrayList idList);
 
 }

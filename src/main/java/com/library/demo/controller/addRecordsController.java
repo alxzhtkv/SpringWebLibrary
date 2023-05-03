@@ -24,6 +24,7 @@ public class addRecordsController {
     private final RequestRepository requestRepository;
     private final UserBookRepository userBookRepository;
 
+
     @PostMapping("/addGenre")
     public String addGenre(Genre genre){
         genreRepository.save(genre);
@@ -121,6 +122,8 @@ public class addRecordsController {
 
         return "redirect:/addUserBook";
     }
+
+
 
 
 }

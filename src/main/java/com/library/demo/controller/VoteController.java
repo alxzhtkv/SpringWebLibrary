@@ -17,7 +17,7 @@ public class VoteController {
 
     private final VoteRepository voteRepository;
 
-//добавить проверку и обновление данных
+
 
     @PostMapping("/booksRating/{id}")
     @Transactional
@@ -36,7 +36,7 @@ public class VoteController {
             voteRepository.save(vote);
         }
 
-        //поменять ссылку
+
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
     }

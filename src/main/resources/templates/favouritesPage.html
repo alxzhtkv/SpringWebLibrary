@@ -14,8 +14,8 @@
     <section class="py-5 text-center container">
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
-                <h1 class="fw-light">Каталог книг</h1>
-                <p class="lead text-body-secondary"> Наш каталог — это ветвистое дерево. Детективы, любовные романы, фэнтези, фантастика, научно-популярные и бизнес-книги — самые популярные жанры!
+                <h1 class="fw-light">Ваше избранное</h1>
+                <p class="lead text-body-secondary"> Ваши любимые книги всегда под рукой!
                 </p>
 
 
@@ -47,6 +47,10 @@
                                 <div class="btn-group">
                                     <a th:href="'/bookPage/'+${book.id}" method="get">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                    </a>
+
+                                    <a th:href="'/deleteFavouriteBook/'+${book.id}" method="get">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Delete</button>
                                     </a>
 
                                 </div>
