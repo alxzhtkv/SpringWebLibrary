@@ -11,8 +11,7 @@
             display: block;
             margin: 20px auto;
             padding: 10px;
-            border: 1px solid #ccc;
-            width: 400px;
+            width: auto;
         }
 
         label {
@@ -31,7 +30,7 @@
             box-sizing: border-box;
         }
 
-        input.button-style[type="submit"] {
+      .button-style {
             background-color: #4CAF50;
             border: none;
             color: #fff;
@@ -40,7 +39,7 @@
             cursor: pointer;
         }
 
-        input.button-style[type="submit"]:hover {
+      .button-style:hover {
             background-color: #45a049;
         }
     </style>
@@ -54,7 +53,7 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Поделитесь Вашим впечатлением от прочитанного!</h1>
-                <p class="lead text-body-secondary">маме на кухне расскажешь чо ты там думаешь, а здесь всем похуй</p>
+                <p class="lead text-body-secondary">Ваше мнение важно для нас</p>
 
 
 
@@ -68,7 +67,7 @@
                     </select>
 
                     <label for="descr">Описание</label>
-                    <textarea id="descr" name="descr"></textarea>
+                    <textarea style="width: 40em; height: 18em" id="descr" name="descr"></textarea>
 
                     <button class="button-style" type="submit">Сохранить</button>
                 </form>

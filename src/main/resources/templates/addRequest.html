@@ -11,8 +11,8 @@
       display: block;
       margin: 20px auto;
       padding: 10px;
-      border: 1px solid #ccc;
-      width: 400px;
+
+      width: auto;
     }
 
     label {
@@ -31,7 +31,7 @@
       box-sizing: border-box;
     }
 
-    input.button-style[type="submit"] {
+   .button-style {
       background-color: #4CAF50;
       border: none;
       color: #fff;
@@ -40,7 +40,7 @@
       cursor: pointer;
     }
 
-    input.button-style[type="submit"]:hover {
+   .button-style:hover {
       background-color: #45a049;
     }
   </style>
@@ -53,9 +53,9 @@
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Поделитесь, какие книги Вы бы хотеали видеть в нашей библиотеке!</h1>
+        <h1 class="fw-light">Поделитесь, какие книги Вы бы хотели видеть в нашей библиотеке!</h1>
         <p class="lead text-body-secondary">Расскажите нам, что бы Вы хотели видеть в нашей библиотеке.<br>
-          Ваши запросы позволяют нам актуализировать каталог книг и предложить вам наиболее интересные и полезные книги. Мы всегда стараемся улучшать наш сервис и учитывать пожелания наших пользователей. Поэтому ваше мнение очень важно для нас.
+          Ваши запросы позволяют нам актуализировать каталог книг и предложить вам наиболее интересные и полезные книги.
         </p>
 
 
@@ -67,7 +67,7 @@
 
 
           <label for="descr">Расскажите, какую книгу вы хотели бы почитать:</label>
-          <textarea id="descr" name="descr"></textarea>
+          <textarea style="height: 18em;width: 35em" id="descr" name="descr"></textarea>
 
           <button class="button-style" type="submit">Сохранить</button>
         </form>
@@ -81,7 +81,6 @@
 
 
   <div class="container mt-5" align="center">
-    <h3>Список запросов</h3>
     <table class="table">
       <thead class="thead-dark">
       <tr>
