@@ -17,7 +17,7 @@ public class GenreTest {
     void TestGenre() throws SQLException, ClassNotFoundException{
         Assertions.assertNotNull(genreRepository.getOne(Long.valueOf(1)));
         Assertions.assertEquals(1,genreRepository.
-                findByNameContainingIgnoreCase("Фантастика").getId());
+                findByName("Фантастика").getId());
 
     }
 }
