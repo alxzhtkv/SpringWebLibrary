@@ -52,7 +52,7 @@
 <!--                                    <form th:action="'/bookPage/'+ ${book.id}" method="get">-->
 <!--                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>-->
 <!--                                    </form>-->
-                                    <a href="#">
+                                    <a th:href="'/bookEdit/'+${book.id}" method="get">
                                          <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
                                     </a>
                                 </div>

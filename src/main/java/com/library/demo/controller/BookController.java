@@ -1,8 +1,8 @@
 package com.library.demo.controller;
 
 import com.library.demo.model.*;
-import com.library.demo.repository.BookRepository;
-import com.library.demo.repository.UserBookRepository;
+import com.library.demo.repository.*;
+import com.library.demo.service.BookService;
 import lombok.AllArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.core.io.ClassPathResource;
@@ -38,6 +38,11 @@ import java.util.Optional;
 public class BookController {
     private final BookRepository bookRepository;
     private final UserBookRepository userBookRepository;
+    private final AuthorRepository authorRepository;
+    private final PublisherRepository publisherRepository;
+    private final GenreRepository genreRepository;
+
+    private final BookService bookService;
 
 
 
@@ -115,7 +120,7 @@ public class BookController {
     @GetMapping("/bookPage/{id}")
     public String getBook(Model model, @PathVariable(value = "id") Long id){
       Book book = bookRepository.searchById(id);
-       model.addAttribute("book", book);
+      model.addAttribute("book", book);
 
         return "bookPage";
     }
@@ -129,6 +134,39 @@ public class BookController {
 //         return "redirect:/userBookPage";
 
     }
+
+    @GetMapping("/bookEdit/{id}")
+    public String getEditBookPage(@PathVariable(value = "id") Long id, Model model){
+
+        Book book = bookRepository.searchById(id);
+        model.addAttribute("book", book);
+
+        Iterable<Author> authors = authorRepository.findAll();
+        model.addAttribute("authors", authors);
+
+        Iterable<Publisher> publishers = publisherRepository.findAll();
+        model.addAttribute("publishers", publishers);
+
+        Iterable<Genre> genres = genreRepository.findAll();
+        model.addAttribute("genres", genres);
+
+
+        return "editBookPage";
+//         return "redirect:/userBookPage";
+
+    }
+
+
+    //, @RequestParam("image1") MultipartFile imageFile
+    @PostMapping("/bookEdit/{id}")
+    public String editBookPage(HttpServletRequest request,@PathVariable(value = "id") Long id,@ModelAttribute Book newBook){
+        bookService.updateBookFields(newBook);
+        String referer = request.getHeader("Referer");
+        return "redirect:" + referer;
+
+    }
+
+
 
 
     @GetMapping("/image/{id}")
