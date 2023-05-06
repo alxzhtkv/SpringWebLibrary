@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
     Book searchById(Long id);
+
+    Book findByName(String name);
     Book getBookById(Long id);
 
     @Modifying
