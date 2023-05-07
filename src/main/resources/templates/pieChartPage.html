@@ -8,54 +8,17 @@
     <title>Библиотека</title>
 
     <style>
-
-
-        .form-style {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin-top: 20px;
+        .book-list {
+            list-style-type: none;
+            padding: 0;
         }
 
-        label {
-            margin-top: 10px;
+        .book-list li {
+            margin-bottom: 10px;
+            font-size: 16px;
         }
-
-        input[type="text"],
-        input[type="number"],
-        select,
-        textarea {
-            width: 300px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 5px;
-        }
-
-        input[type="file"] {
-            margin-top: 10px;
-        }
-
-        button.button-style[type="submit"] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-
-        button.button-style[type="submit"]:hover {
-            background-color: #45a049;
-        }
-
-        textarea {
-            height: 150px;
-        }
-
     </style>
+
 
 </head>
 
@@ -68,8 +31,9 @@
         <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto">
                 <h1 class="fw-light">Статистика</h1>
-                <h3 class="fw-light">Самые часто добавляемые в "Избранное" книги</h3>
-
+<!--                <h3 class="fw-light"></h3>-->
+                <p class="lead text-body-secondary">Самые часто добавляемые в "Избранное" книги
+                </p>
 
                 <canvas id="myChart"></canvas>
 
@@ -85,7 +49,7 @@
                             labels: data.map(item => item.label),
                             datasets: [{
                                 data: data.map(item => item.value),
-                                backgroundColor: ['red', 'blue', 'green'] // Add your desired colors here
+                                backgroundColor: ['PaleGoldenrod', 'Moccasin', 'PeachPuff'] // Add your desired colors here
                             }]
                         },
                         options: {
@@ -95,6 +59,12 @@
                 </script>
 
             </div>
+
+            <p class="lead text-body-secondary">Список книг по количеству просмотров
+            </p>
+            <ul class="book-list">
+                <li th:each="book : ${bookList}" th:text="${book.name}"></li>
+            </ul>
         </div>
     </section>
 

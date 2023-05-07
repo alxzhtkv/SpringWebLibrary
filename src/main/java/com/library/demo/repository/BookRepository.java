@@ -19,6 +19,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Book findByName(String name);
     Book getBookById(Long id);
 
+    @Query("SELECT b FROM Book b ORDER BY b.viewCount DESC")
+    List<Book> findAllByViewCountDescr();
+
+
     @Modifying
     @Query("select b.name from Book b where b.id  in :idList")
     List<String> getListOfBookNames(@Param("idList") ArrayList idList);
@@ -35,6 +39,10 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Modifying
     @Query("select b from Book b where b.id  in :idList")
     List<Book> getBooksByIds(@Param("idList") ArrayList idList);
+
+
+
+
 
 
 

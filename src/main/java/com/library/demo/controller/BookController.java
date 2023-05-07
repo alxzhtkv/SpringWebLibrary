@@ -125,6 +125,9 @@ public class BookController {
     @GetMapping("/bookPage/{id}")
     public String getBook(Model model, @PathVariable(value = "id") Long id) {
         Book book = bookRepository.searchById(id);
+        Long viewCount = book.getViewCount()+1;
+        book.setViewCount(viewCount);
+        bookRepository.save(book);
         model.addAttribute("book", book);
 
         return "bookPage";

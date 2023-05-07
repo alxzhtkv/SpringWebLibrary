@@ -2,6 +2,7 @@ package com.library.demo.controller;
 
 
 import com.library.demo.model.Book;
+import com.library.demo.repository.BookRepository;
 import com.library.demo.service.BookService;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,7 @@ public class ChartController {
 
 
     private final BookService bookService;
+    private final BookRepository bookRepository;
 
     @GetMapping("/chart")
     public String showChart(Model model) {
@@ -32,7 +34,12 @@ public class ChartController {
                         new ChartDataItem(books.get(2).getName(), books.get(2).getAvgRating())
                 );
 
+        Iterable<Book> bookList= bookRepository.findAllByViewCountDescr();
         model.addAttribute("chartData", chartData);
+        model.addAttribute("bookList", bookList);
+
+
+
         return "pieChartPage";
     }
 
