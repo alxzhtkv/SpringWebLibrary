@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import untils.ImageUploadHelper;
 
 import java.io.IOException;
 
@@ -112,10 +113,10 @@ public class addRecordsController {
                                   @RequestParam("image1") MultipartFile imageFile) throws IOException {
 
         byte[] content = contentFile.getBytes();
-        byte[] image = imageFile.getBytes();
+        String imagePath = ImageUploadHelper.uploadImage(imageFile);
 
         userBook.setContent(content);
-        userBook.setImage(image);
+        userBook.setImage(imagePath);
         userBook.setUsername(username);
         userBookRepository.save(userBook);
 

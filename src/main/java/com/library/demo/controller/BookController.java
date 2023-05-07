@@ -3,38 +3,23 @@ package com.library.demo.controller;
 import com.library.demo.model.*;
 import com.library.demo.repository.*;
 import com.library.demo.service.BookService;
-import jakarta.servlet.http.Part;
 import lombok.AllArgsConstructor;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.ResourceUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import untils.ImageUploadHelper;
-//import org.springframework.mock.web.MockMultipartFile;
 
-import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.Optional;
 
 
 @Controller
@@ -63,43 +48,23 @@ public class BookController {
 //        return "redirect:/addBook";
 //    }
 
+    @GetMapping({"*/images/{name}", "/images/{name}"})
+    public ResponseEntity<byte[]> getRequestManagementPage(HttpServletResponse response, @PathVariable(value = "name") String name) throws IOException {
+        Path path = Paths.get(ImageUploadHelper.getPathToFile(name));
+        byte[] bytes = Files.readAllBytes(path);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.IMAGE_JPEG)
+                .body(bytes);
+    }
 
     @PostMapping("/addBook")
-    public String addBook(@ModelAttribute Book book, HttpServletRequest request,
-                          @RequestParam("image1") MultipartFile imageFile) throws IOException {
-
-
+    public String addBook(@ModelAttribute Book book, HttpServletRequest request, @RequestParam("image1") MultipartFile imageFile) throws IOException {
         bookRepository.save(book);
-
-
         String imagePath = ImageUploadHelper.uploadImage(imageFile);
-
-
-//            String fileName = StringUtils.cleanPath(imageFile.getOriginalFilename());
-//            String fileName = StringUtils.cleanPath(book.getId().toString() + ".jpg");
-//            String uploadDir = "book-covers/";
-//            String filePath = uploadDir + fileName;
-//            try {
-//                Path path = Paths.get(uploadDir);
-//                if (!Files.exists(path)) {
-//                    Files.createDirectories(path);
-//                }
-//                Files.copy(imageFile.getInputStream(), path.resolve(fileName));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-
-
-        // сохранение относительного пути файла в базу данных
         book.setImage(imagePath);
-        bookRepository.save(book);
 
-//        byte[] content = contentFile.getBytes();
-//        byte[] image = imageFile.getBytes();
-//        book.setContent(content);
-//        book.setImage(image);
-//
-//        bookRepository.save(book);
+        bookRepository.save(book);
         return "redirect:/addBook";
     }
 
@@ -125,7 +90,7 @@ public class BookController {
     @GetMapping("/bookPage/{id}")
     public String getBook(Model model, @PathVariable(value = "id") Long id) {
         Book book = bookRepository.searchById(id);
-        Long viewCount = book.getViewCount()+1;
+        Long viewCount = book.getViewCount() + 1;
         book.setViewCount(viewCount);
         bookRepository.save(book);
         model.addAttribute("book", book);
@@ -165,26 +130,12 @@ public class BookController {
     }
 
 
-    //, @RequestParam("image1") MultipartFile imageFile
     @PostMapping("/bookEdit/{id}")
     public String editBookPage(HttpServletRequest request, @PathVariable(value = "id") Long id, @ModelAttribute Book newBook) {
         bookService.updateBookFields(newBook);
         String referer = request.getHeader("Referer");
         return "redirect:" + referer;
 
-    }
-
-
-    @GetMapping("/image/{id}")
-    public ResponseEntity<byte[]> getImage(@PathVariable Long id) throws IOException {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Book not found"));
-        String imagePath = book.getImage();
-        Path path = Paths.get(imagePath);
-        byte[] imageBytes = Files.readAllBytes(path);
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.IMAGE_JPEG);
-        headers.setContentLength(imageBytes.length);
-        return new ResponseEntity<>(imageBytes, headers, HttpStatus.OK);
     }
 
 //    @GetMapping("/image/{id}")

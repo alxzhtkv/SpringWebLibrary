@@ -38,8 +38,8 @@ public class UserBook {
     @Column(name="authorName")
     private String authorName;
 
-    @Column(name="image", length = 1043741 )
-    private byte[] image;
+    @Column(name="image")
+    private String image;
 
     public UserBook() {
 

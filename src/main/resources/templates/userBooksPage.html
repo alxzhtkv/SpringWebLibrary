@@ -111,10 +111,10 @@
                 <div class="col" th:each="userBook : ${userBooks}">
                     <div class="card shadow-sm">
 
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+                        <div style="max-height: 600px; min-height: 300px">
                             <title>Placeholder</title>
-                            <image th:href="${userBook.image}" width="100%" height="100%" />
-                        </svg>
+                            <img th:src="${userBook.getImage()}" alt="book image" style="max-height: 600px;  min-height: 300px; width: 100%" />
+                        </div>
                         <div class="card-body">
                             <p class="card-text" th:text="${userBook.name}"></p>
                             <p class="card-text" th:text="${userBook.authorName}"></p>
