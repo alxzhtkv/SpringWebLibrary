@@ -5,6 +5,9 @@ import com.library.demo.repository.BookRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @AllArgsConstructor
 @Service
 public class BookService {
@@ -53,5 +56,41 @@ public class BookService {
 
 
     }
+
+    public List<Book> findThreeFavouriteBooks(){
+        List<Book> books = bookRepository.findAll();
+        Book max1 = null;
+        Book max2 = null;
+        Book max3 = null;
+
+        for (Book book : books) {
+            if (max1 == null || book.getAvgRating() > max1.getAvgRating()) {
+                max3 = max2;
+                max2 = max1;
+                max1 = book;
+            } else if (max2 == null || book.getAvgRating() > max2.getAvgRating()) {
+                max3 = max2;
+                max2 = book;
+            } else if (max3 == null || book.getAvgRating() > max3.getAvgRating()) {
+                max3 = book;
+            }
+        }
+
+        List<Book> result = new ArrayList<>();
+        if (max1 != null) {
+            result.add(max1);
+        }
+        if (max2 != null) {
+            result.add(max2);
+        }
+        if (max3 != null) {
+            result.add(max3);
+        }
+
+        return result;
+    }
+
+
+
 
 }

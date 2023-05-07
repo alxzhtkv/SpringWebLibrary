@@ -1,6 +1,9 @@
 package com.library.demo.controller;
 
 
+import com.library.demo.model.Book;
+import com.library.demo.service.BookService;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,16 +13,23 @@ import java.util.Arrays;
 import java.util.List;
 
 
+@AllArgsConstructor
 @Controller
 public class ChartController {
 
+
+    private final BookService bookService;
+
     @GetMapping("/chart")
     public String showChart(Model model) {
+
+
+        List<Book> books = bookService.findThreeFavouriteBooks();
         List<ChartDataItem> chartData = // Retrieve or generate your data as a list of objects
                 Arrays.asList(
-                        new ChartDataItem("Label 1", 25),
-                        new ChartDataItem("Label 2", 50),
-                        new ChartDataItem("Label 3", 75)
+                        new ChartDataItem(books.get(0).getName(), books.get(0).getAvgRating()),
+                        new ChartDataItem(books.get(1).getName(), books.get(1).getAvgRating()),
+                        new ChartDataItem(books.get(2).getName(), books.get(2).getAvgRating())
                 );
 
         model.addAttribute("chartData", chartData);

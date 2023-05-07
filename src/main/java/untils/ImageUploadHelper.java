@@ -12,8 +12,8 @@ import java.util.UUID;
 
 @UtilityClass
 public class ImageUploadHelper {
-    private static final String IMAGE_UPLOAD_PATH = "%s.%s";
-    private static final String ABSOLUTE_PATH = "C:/Users/Александра/Desktop/courseWork6/demo/src/main/resources/images/";
+    private static final String IMAGE_UPLOAD_PATH = "images/%s.%s";
+    private static final String ABSOLUTE_PATH = "C:/Users/Александра/Desktop/courseWork6/demo/src/main/resources/";
 
     public static String getPath(String fileName, String type) {
         return String.format(IMAGE_UPLOAD_PATH, fileName, type);

@@ -30,6 +30,11 @@ public class FavouritesController {
         Favourites favourites = new Favourites(username,id);
         if(!favouritesRepository.existsByUsernameAndBookId(username,id)){
             favouritesRepository.save(favourites);
+            Book book = bookRepository.getBookById(id);
+            int favRating = book.getAvgRating() + 1;
+            book.setAvgRating(favRating);
+            bookRepository.save(book);
+
         }
 
         String referer = request.getHeader("Referer");
