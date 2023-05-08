@@ -4,6 +4,9 @@ import com.library.demo.model.*;
 import com.library.demo.repository.*;
 import com.library.demo.service.BookService;
 import lombok.AllArgsConstructor;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 
 import org.springframework.http.ResponseEntity;
@@ -60,14 +63,35 @@ public class BookController {
     }
 
 
-    @GetMapping({"*/content/{content}" ,"/content/{content}"})
+    @GetMapping("/read/content/{content}")
     public ResponseEntity<byte[]> openPdf(@PathVariable(value = "content") String content)throws IOException {
+        System.out.println(content);
         Path path = Paths.get(FileUploadHelper.getPathToFile(content));
         byte[] bytes = Files.readAllBytes(path);
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.APPLICATION_PDF)
                 .body(bytes);
+
+
+    }
+
+    @GetMapping("/download/content/{content}")
+    public ResponseEntity<Resource> downloadPDF(@PathVariable(value = "content") String content)throws IOException {
+        System.out.println("may");
+        System.out.println(content);
+
+//        Book book = bookRepository.getBookById(id);
+        Path path = Paths.get(FileUploadHelper.getPathToFile(content));
+
+        byte[] bytes = Files.readAllBytes(path);
+        ByteArrayResource resource = new ByteArrayResource(bytes);
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=book.pdf")
+                .contentType(MediaType.APPLICATION_PDF)
+
+                .body(resource);
 
 
     }

@@ -124,11 +124,11 @@
             </p>
             <div class="button-container">
 <!--                <a th:href="'/bookPage/'+${book.id}" method="get">-->
-                <a th:href="${book.getContent()}" target="_blank">
+                <a th:href="@{'/read/' + ${book.getContent()}}" target="_blank">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Читать</button>
                 </a>
 
-                <a href="#">
+                <a th:href="@{'/download/' + ${book.getContent()}}" download>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Скачать</button>
                 </a>
                 <a th:href="'/addFavourite/'+${book.id}" method="get">
