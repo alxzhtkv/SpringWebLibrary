@@ -134,6 +134,17 @@ public class BookController {
         return "bookPage";
     }
 
+    @GetMapping("/bookAdminPage/{id}")
+    public String getAdminBook(Model model, @PathVariable(value = "id") Long id) {
+        Book book = bookRepository.searchById(id);
+        Long viewCount = book.getViewCount() + 1;
+        book.setViewCount(viewCount);
+        bookRepository.save(book);
+        model.addAttribute("book", book);
+
+        return "bookAdminPage";
+    }
+
     @GetMapping("/deleteUserBook/{id}")
     public String deleteUserBook(HttpServletRequest request, @PathVariable(value = "id") Long id) {
         userBookRepository.deleteById(id);
