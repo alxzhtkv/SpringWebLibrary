@@ -78,21 +78,14 @@ public class BookController {
 
     @GetMapping("/download/content/{content}")
     public ResponseEntity<Resource> downloadPDF(@PathVariable(value = "content") String content)throws IOException {
-        System.out.println("may");
-        System.out.println(content);
-
-//        Book book = bookRepository.getBookById(id);
         Path path = Paths.get(FileUploadHelper.getPathToFile(content));
-
         byte[] bytes = Files.readAllBytes(path);
         ByteArrayResource resource = new ByteArrayResource(bytes);
         return ResponseEntity
                 .ok()
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=book.pdf")
                 .contentType(MediaType.APPLICATION_PDF)
-
                 .body(resource);
-
 
     }
 

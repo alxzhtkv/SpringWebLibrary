@@ -27,9 +27,9 @@ public class UserBook {
     private String name;
 
 
-    @Lob
-    @Column(name="content", length = 1043741)
-    private byte[] content;
+
+    @Column(name="content")
+    private String content;
 
     @ManyToOne
     @JoinColumn

@@ -124,7 +124,7 @@
 
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <a href="#">
+                                    <a th:href="@{'/read/' + ${userBook.getContent()}}" target="_blank">
                                         <button type="button" class="btn btn-sm btn-outline-secondary">Читать</button>
                                     </a>
                                     <a th:href="'/deleteUserBook/'+${userBook.id}" method="get">

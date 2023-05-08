@@ -9,8 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import untils.FileUploadHelper;
 import untils.ImageUploadHelper;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -107,20 +109,20 @@ public class addRecordsController {
 
 
     @PostMapping("/addUserBook")
-    public String getUserBookPage(@AuthenticationPrincipal(expression = "username") String username,
-                                  @ModelAttribute UserBook userBook,
-                                  @RequestParam("content1") MultipartFile contentFile,
-                                  @RequestParam("image1") MultipartFile imageFile) throws IOException {
+    public String getUserBookPage (@AuthenticationPrincipal(expression = "username") String username,
+                                   @ModelAttribute UserBook userBook,
+                                   HttpServletRequest request,
+                                   @RequestParam("content1") MultipartFile contentFile,
+                                   @RequestParam("image1") MultipartFile imageFile) throws IOException {
 
-        byte[] content = contentFile.getBytes();
         String imagePath = ImageUploadHelper.uploadImage(imageFile);
+        String contentPath = FileUploadHelper.uploadImage(contentFile);
 
-        userBook.setContent(content);
+        userBook.setContent(contentPath);
         userBook.setImage(imagePath);
         userBook.setUsername(username);
+
         userBookRepository.save(userBook);
-
-
         return "redirect:/addUserBook";
     }
 
