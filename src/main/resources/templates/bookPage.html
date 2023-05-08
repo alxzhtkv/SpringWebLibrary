@@ -123,7 +123,8 @@
                 </div>
             </p>
             <div class="button-container">
-                <a th:href="'/bookPage/'+${book.id}" method="get">
+<!--                <a th:href="'/bookPage/'+${book.id}" method="get">-->
+                <a th:href="${book.getContent()}" target="_blank">
                     <button type="button" class="btn btn-sm btn-outline-secondary">Читать</button>
                 </a>
 

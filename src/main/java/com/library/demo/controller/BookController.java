@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import untils.FileUploadHelper;
 import untils.ImageUploadHelper;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,11 +59,29 @@ public class BookController {
                 .body(bytes);
     }
 
+
+    @GetMapping({"*/content/{content}" ,"/content/{content}"})
+    public ResponseEntity<byte[]> openPdf(@PathVariable(value = "content") String content)throws IOException {
+        Path path = Paths.get(FileUploadHelper.getPathToFile(content));
+        byte[] bytes = Files.readAllBytes(path);
+        return ResponseEntity
+                .ok()
+                .contentType(MediaType.APPLICATION_PDF)
+                .body(bytes);
+
+
+    }
+
+
+
     @PostMapping("/addBook")
-    public String addBook(@ModelAttribute Book book, HttpServletRequest request, @RequestParam("image1") MultipartFile imageFile) throws IOException {
+    public String addBook(@ModelAttribute Book book, HttpServletRequest request, @RequestParam("content1") MultipartFile contentFile, @RequestParam("image1") MultipartFile imageFile) throws IOException {
         bookRepository.save(book);
         String imagePath = ImageUploadHelper.uploadImage(imageFile);
         book.setImage(imagePath);
+
+        String contentPath = FileUploadHelper.uploadImage(contentFile);
+        book.setContent(contentPath);
 
         bookRepository.save(book);
         return "redirect:/addBook";
