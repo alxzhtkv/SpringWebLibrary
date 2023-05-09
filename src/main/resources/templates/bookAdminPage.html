@@ -117,11 +117,11 @@
     <div class="wrapper">
         <div class="image-box">
 
-            <p class="lead text-body-secondary">
+
                 <div style="max-height: 600px; min-height: 300px">
                     <img th:src="${book.getImage()}" alt="book image" style="max-height: 600px;  min-height: 300px; width: 100%" />
                 </div>
-            </p>
+
             <div class="button-container">
 <!--                <a th:href="'/bookPage/'+${book.id}" method="get">-->
                 <a th:href="@{'/read/' + ${book.getContent()}}" target="_blank">
@@ -131,9 +131,11 @@
                 <a th:href="@{'/download/' + ${book.getContent()}}" download>
                     <button type="button" class="btn btn-sm btn-outline-secondary">Скачать</button>
                 </a>
-                <a th:href="'/addFavourite/'+${book.id}" method="get">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">В избранное</button>
+                <a href="#" method="get">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">Удалить</button>
                 </a>
+
+
             </div>
 
 
@@ -167,6 +169,7 @@
             <p th:text="${book.publishYear}"></p>
             <p class="lead text-body-secondary" >Рейтиг:</p>
             <p th:text="${book.totalRating}"></p>
+
 
 
 
