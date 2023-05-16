@@ -14,7 +14,7 @@ import java.net.URL;
 @Controller
 public class VideoController {
 
-    private static final String API_KEY = "AIzaSyB8CqZZceBgEKEiA434NJoOofYtyJu2OdM";
+    private static final String API_KEY = "apikey";
     private static final String VIDEO_ID = "R-bI0AhSyU0";
 
     @GetMapping("/video")
